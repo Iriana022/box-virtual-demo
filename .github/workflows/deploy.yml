@@ -28,7 +28,7 @@ jobs:
         run: npm run build
 
       - name: Deploy to github
-        uses: paceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           push_dir: ./dist
