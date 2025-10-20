@@ -1,0 +1,34 @@
+name: Deploy react app to github pages
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  content: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Node setup
+        uses: actions/node@v4
+        with:
+          node-version: 20
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build app
+        run: npm run build
+
+      - name: Deploy to github
+        uses: paceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          push_dir: ./dist
